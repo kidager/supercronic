@@ -1,20 +1,13 @@
 name: goreleaser
+
 on:
   pull_request:
-  push:
-    # # run only against tags
-    # tags:
-    #   - "*"
-    branches:
-      - 'feat/add-goreleaser'
   release:
     types: [published]
 
 permissions:
   contents: write
   packages: write
-  # issues: write
-  # id-token: write
 
 jobs:
   goreleaser:
@@ -32,8 +25,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: goreleaser/goreleaser-action@v6
-        # if: success() && startsWith(github.ref, 'refs/tags/')
-        if: success()
+        if: success() && startsWith(github.ref, 'refs/tags/')
         with:
           version: "~> v2"
           args: release --clean

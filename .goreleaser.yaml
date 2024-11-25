@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 project_name: supercronic
 
 builds:
@@ -8,26 +9,15 @@ builds:
     goarch:
       - amd64
       - arm64
+archives:
+  - format: binary
 kos:
+  # TODO: Replace this with ghcr.io/aptible/supercronic once done with testing
   - repository: ghcr.io/kidager/supercronic
     tags:
       - "{{.Version}}"
       - latest
-    bare: true
     preserve_import_paths: false
     platforms:
       - linux/amd64
       - linux/arm64
-    annotations:
-      title: "{{ .ProjectName }}"
-      description: "{{ .ProjectName }}"
-      licenses: "MIT"
-nfpms:
-- maintainer: Jacem Chaieb <jacem@chaieb.dev>
-  description: Supercronic Fork
-  homepage: https://github.com/kidager/supercronic
-  license: MIT
-  formats:
-    - deb
-    - rpm
-    - apk
