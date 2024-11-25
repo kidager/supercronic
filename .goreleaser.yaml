@@ -8,24 +8,26 @@ builds:
     goarch:
       - amd64
       - arm64
-dockers:
-  - image_templates: ["ghcr.io/kidager/supercronic:{{ .Version }}"]
-    dockerfile: Dockerfile
-    build_flag_templates:
-    - --label=org.opencontainers.image.title={{ .ProjectName }}
-    - --label=org.opencontainers.image.description={{ .ProjectName }}
-    - --label=org.opencontainers.image.url=https://github.com/kidager/supercronic
-    - --label=org.opencontainers.image.source=https://github.com/kidager/supercronic
-    - --label=org.opencontainers.image.version={{ .Version }}
-    - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
-    - --label=org.opencontainers.image.revision={{ .FullCommit }}
-    - --label=org.opencontainers.image.licenses=MIT
+kos:
+  - repository: ghcr.io/kidager/supercronic
+    tags:
+      - "{{.Version}}"
+      - latest
+    bare: true
+    preserve_import_paths: false
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    annotations:
+      title: "{{ .ProjectName }}"
+      description: "{{ .ProjectName }}"
+      licenses: "MIT"
 nfpms:
 - maintainer: Jacem Chaieb <jacem@chaieb.dev>
   description: Supercronic Fork
   homepage: https://github.com/kidager/supercronic
   license: MIT
   formats:
-  - deb
-  - rpm
-  - apk
+    - deb
+    - rpm
+    - apk
