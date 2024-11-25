@@ -89,8 +89,7 @@ ENTRYPOINT ["/usr/local/bin/supercronic", "/etc/custom-crontab"]
 You can as well download a pre-built binary.
 
 Navigate to [the releases page][releases], and grab the build that suits your
-system.
-The releases include example `Dockerfile` stanzas to install
+system. The releases include example `Dockerfile` stanzas to install
 Supercronic that you can easily include in your own `Dockerfile` or adjust as
 needed.
 
